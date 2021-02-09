@@ -1,5 +1,6 @@
 import { IncomingMessage } from 'http';
 import { AuthorizationParameters as OidcAuthorizationParameters } from 'openid-client';
+import { Store } from './store';
 
 /**
  * Configuration properties.
@@ -11,7 +12,9 @@ import { AuthorizationParameters as OidcAuthorizationParameters } from 'openid-c
  * SECRET=LONG_RANDOM_VALUE
  * ```
  */
+
 export interface Config {
+  Store?: Store;
   /**
    * The secret(s) used to derive an encryption key for the user identity in a session cookie and
    * to sign the transient cookies used by the login callback.

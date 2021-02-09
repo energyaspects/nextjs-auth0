@@ -1,4 +1,4 @@
-import { getConfig, CookieStore, TransientStore, clientFactory } from './auth0-session';
+import { getConfig, CookieStore, TransientStore, clientFactory, Store } from './auth0-session';
 import {
   handlerFactory,
   callbackHandler,
@@ -32,12 +32,14 @@ function getInstance(): SignInWithAuth0 {
   return instance;
 }
 
+const getStore = (store: any, config: any): Store => store || new CookieStore(config);
+
 export const initAuth0: InitAuth0 = (params) => {
   const config = getConfig(getParams(params));
   const getClient = clientFactory(config, { name: 'nextjs-auth0', version });
   const transientStore = new TransientStore(config);
-  const cookieStore = new CookieStore(config);
-  const sessionCache = new SessionCache(config, cookieStore);
+  const store = getStore(params?.Store, config);
+  const sessionCache = new SessionCache(config, store);
   const getSession = sessionFactory(sessionCache);
   const getAccessToken = accessTokenFactory(getClient, config, sessionCache);
   const withApiAuthRequired = withApiAuthRequiredFactory(sessionCache);

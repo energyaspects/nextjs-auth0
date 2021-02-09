@@ -5,6 +5,7 @@ import { encryption as deriveKey } from './utils/hkdf';
 import createDebug from './utils/debug';
 import { getAll as getCookies, clear as clearCookie, set as setCookie } from './utils/cookies';
 import { Config } from './config';
+import { Store } from './store';
 
 const debug = createDebug('cookie-store');
 const epoch = (): number => (Date.now() / 1000) | 0; // eslint-disable-line no-bitwise
@@ -14,7 +15,7 @@ const enc = 'A256GCM';
 
 const notNull = <T>(value: T | null): value is T => value !== null;
 
-export default class CookieStore {
+export default class CookieStore implements Store {
   private keystore: JWKS.KeyStore;
 
   private currentKey: JWK.OctKey | undefined;

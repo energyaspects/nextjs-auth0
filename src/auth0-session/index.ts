@@ -7,3 +7,4 @@ export { default as logoutHandler } from './handlers/logout';
 export { default as callbackHandler } from './handlers/callback';
 export { default as clientFactory, ClientFactory } from './client';
 export { SessionCache } from './session-cache';
+export { Store } from './store';

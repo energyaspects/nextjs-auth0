@@ -1,6 +1,6 @@
 import { Config, ConfigParameters, getConfig } from '../../src/auth0-session';
 import { AuthorizationParameters } from '../../src/auth0-session/config';
-import { DeepPartial } from '../../src/auth0-session/get-config';
+import { DeepPartial } from 'ts-essentials';
 
 const defaultConfig = {
   secret: '__test_session_secret__',
